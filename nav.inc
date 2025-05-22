@@ -1,4 +1,4 @@
-nav>
+<nav>
         <ul class="nav-menu">
           <li class="active"><a href="index.html">Home</a></li>
           <li><a href="search.html">Search Jobs</a></li>
