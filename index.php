@@ -9,7 +9,7 @@
               Discover opportunities at the fastest growing startups. Join
               innovative teams and build the future.
             </p>
-            <a href="search.html" class="btn">Search Jobs</a>
+            <a href="search.php" class="btn">Search Jobs</a>
           </article>
           <figure class="hero-image">
             <img

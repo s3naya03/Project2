@@ -56,7 +56,7 @@
         </section>
 
         <section class="apply-section">
-          <a href="apply.html" class="apply-button">Apply Now</a>
+          <a href="apply.php" class="apply-button">Apply Now</a>
         </section>
 
         <aside class="did-you-know">
