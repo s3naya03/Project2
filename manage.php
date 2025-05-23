@@ -1,4 +1,13 @@
+<?php
+// manage.php
 
+include("settings.php");
+
+$conn = mysqli_connect($host, $user, $password, $database);
+if (!$conn) {
+    die("Database connection failed: " . mysqli_connect_error());
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -179,4 +188,3 @@ function displayResults($result) {
     }
 }
 ?>
-
