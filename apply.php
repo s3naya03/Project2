@@ -7,8 +7,8 @@
       </header>
 
       <form
-        action="https://mercury.swin.edu.au/it000000/formtest.php"
-        method="post">
+         action="process_eoi.php" method="post" novalidate="novalidate">
+>
         <fieldset>
           <legend>Personal Details</legend>
 
