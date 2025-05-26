@@ -1,8 +1,7 @@
 <footer>
       <section class="container">
         <section class="footer-content">
-          <p>Git Hub Link - </p> 
-          <a href="https://github.com/s3naya03/ProjectPart1" target="_blank">https://github.com/s3naya03/ProjectPart1</a>
+          
           <nav class="social-icons" aria-label="Social media links">
             <a href="mailto:105098518@student.swin.edu.au"><i class="fas fa-envelope"></i></i
             ></a>
