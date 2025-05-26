@@ -1,5 +1,4 @@
 <?php
-// login.php
 session_start();
 include("settings.php");
 
@@ -7,6 +6,8 @@ $conn = mysqli_connect($host, $user, $password, $database);
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
+
+$message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
@@ -22,36 +23,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user) {
         $current_time = time();
         $last_attempt = strtotime($user['last_attempt']);
-        $lockout_time = 10 * 60; // 10 minutes
+        $lockout_time = 10 * 60;
 
-        // Check if locked out
         if ($user['login_attempts'] >= 3 && ($current_time - $last_attempt) < $lockout_time) {
             $remaining = $lockout_time - ($current_time - $last_attempt);
-            echo "<p>Account locked. Try again in " . ceil($remaining / 60) . " minutes.</p>";
+            $message = "Account locked. Try again in " . ceil($remaining / 60) . " minutes.";
         } else {
             if (password_verify($password, $user['password_hash'])) {
-                // Successful login
                 $_SESSION['username'] = $user['username'];
-
-                // Reset login attempts
                 $reset = "UPDATE users SET login_attempts = 0 WHERE username = ?";
                 $reset_stmt = mysqli_prepare($conn, $reset);
                 mysqli_stmt_bind_param($reset_stmt, "s", $username);
                 mysqli_stmt_execute($reset_stmt);
-
                 header("Location: manage.php");
                 exit();
             } else {
-                // Failed login
                 $update = "UPDATE users SET login_attempts = login_attempts + 1, last_attempt = NOW() WHERE username = ?";
                 $fail_stmt = mysqli_prepare($conn, $update);
                 mysqli_stmt_bind_param($fail_stmt, "s", $username);
                 mysqli_stmt_execute($fail_stmt);
-                echo "<p>Invalid credentials.</p>";
+                $message = "Invalid credentials.";
             }
         }
     } else {
-        echo "<p>User not found.</p>";
+        $message = "User not found.";
     }
 
     mysqli_stmt_close($stmt);
@@ -59,24 +54,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Manager Login</title>
-</head>
-<body>
-    <h2>HR Manager Login</h2>
+<?php include("header.inc"); ?>
+<?php include("nav.inc"); ?>
+
+<main class="container" style="max-width: 500px; margin: 3rem auto; padding: 2rem; background-color: #f9f9f9; border-radius: 10px;">
+    <h2 style="text-align: center;">HR Manager Login</h2>
+    <?php if (!empty($message)) echo "<p style='color:red; text-align:center;'>$message</p>"; ?>
     <form method="post" action="login.php">
         <p>
             <label for="username">Username:</label>
-            <input type="text" name="username" required>
+            <input type="text" name="username" id="username" required style="width: 100%; padding: 8px;">
         </p>
         <p>
             <label for="password">Password:</label>
-            <input type="password" name="password" required>
+            <input type="password" name="password" id="password" required style="width: 100%; padding: 8px;">
         </p>
-        <input type="submit" value="Login">
+        <p style="text-align: center;">
+            <button type="submit" class="btn">Login</button>
+        </p>
     </form>
-</body>
-</html>
+</main>
+
+<?php include("footer.inc"); ?>

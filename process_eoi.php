@@ -1,24 +1,23 @@
 <?php
-// process_eoi.php
-
-include("settings.php");
+include("header.inc");
+include("nav.inc");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: apply.php");
     exit();
 }
 
+include("settings.php");
+
 $conn = mysqli_connect($host, $user, $password, $database);
 if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+    die("<main class='container error-box'><p>Connection failed: " . mysqli_connect_error() . "</p></main>");
 }
 
-// Sanitize function
 function clean_input($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
 
-// Sanitize and assign all fields
 $job_ref      = clean_input($_POST["job_ref"]);
 $first_name   = clean_input($_POST["first_name"]);
 $last_name    = clean_input($_POST["last_name"]);
@@ -33,7 +32,6 @@ $phone        = clean_input($_POST["phone"]);
 $skills       = isset($_POST["skills"]) ? $_POST["skills"] : [];
 $other_skills = clean_input($_POST["other_skills"]);
 
-// Server-side validation
 $errors = [];
 
 if (!preg_match("/^[A-Za-z0-9]{5}$/", $job_ref)) $errors[] = "Invalid job reference.";
@@ -44,7 +42,6 @@ if (!preg_match("/^\d{4}$/", $postcode)) $errors[] = "Invalid postcode.";
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = "Invalid email.";
 if (!preg_match("/^[0-9 ]{8,12}$/", $phone)) $errors[] = "Invalid phone number.";
 
-// Simple postcode-state match (example: VIC should start with 3)
 $state_prefix = [
     "VIC" => ["3", "8"],
     "NSW" => ["1", "2"],
@@ -59,21 +56,27 @@ if (!in_array(substr($postcode, 0, 1), $state_prefix[$state])) {
     $errors[] = "Postcode does not match selected state.";
 }
 
-// Show errors
+if (in_array("Other", $skills) && empty($other_skills)) {
+    $errors[] = "You selected 'Other skills' but did not specify them.";
+}
+
+echo "<main class='container'>";
 if (count($errors) > 0) {
+    echo "<div class='error-box'>";
     echo "<h2>Submission Error</h2><ul>";
     foreach ($errors as $error) echo "<li>$error</li>";
-    echo "</ul><p><a href='apply.php'>Go back</a></p>";
+    echo "</ul><p><a href='apply.php' class='btn'>Go back</a></p>";
+    echo "</div>";
+    echo "</main>";
+    include("footer.inc");
     exit();
 }
 
-// Skills (up to 4)
-$skill1 = isset($skills[0]) ? $skills[0] : "";
-$skill2 = isset($skills[1]) ? $skills[1] : "";
-$skill3 = isset($skills[2]) ? $skills[2] : "";
-$skill4 = isset($skills[3]) ? $skills[3] : "";
+$skill1 = $skills[0] ?? "";
+$skill2 = $skills[1] ?? "";
+$skill3 = $skills[2] ?? "";
+$skill4 = $skills[3] ?? "";
 
-// Create table if not exists
 $table_sql = "CREATE TABLE IF NOT EXISTS eoi (
     EOInumber INT AUTO_INCREMENT PRIMARY KEY,
     job_reference VARCHAR(5),
@@ -96,7 +99,6 @@ $table_sql = "CREATE TABLE IF NOT EXISTS eoi (
 )";
 mysqli_query($conn, $table_sql);
 
-// Insert EOI
 $insert_sql = "INSERT INTO eoi (
     job_reference, first_name, last_name, dob, gender, street_address,
     suburb, state, postcode, email, phone,
@@ -111,12 +113,17 @@ mysqli_stmt_bind_param($stmt, "ssssssssssssssss",
 
 if (mysqli_stmt_execute($stmt)) {
     $eoi_number = mysqli_insert_id($conn);
+    echo "<div class='confirmation-box'>";
     echo "<h2>Application Received!</h2>";
     echo "<p>Thank you, <strong>$first_name</strong>. Your EOInumber is <strong>$eoi_number</strong>.</p>";
+    echo "<a href='jobs.php' class='btn'>Return to Jobs</a>";
+    echo "</div>";
 } else {
-    echo "<p>Database error. Please try again later.</p>";
+    echo "<div class='error-box'><p>Database error. Please try again later.</p></div>";
 }
+echo "</main>";
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
+include("footer.inc");
 ?>

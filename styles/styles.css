@@ -29,6 +29,7 @@ body {
     text-align:center;
 }
 
+
 a {
     text-decoration: none;
     color: var(--primary-color);
@@ -174,74 +175,10 @@ nav {
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
-
----------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-.job-card:hover {
-    transform: translateY(-5px);
-}
-
-.job-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Job Tile */
-.job-tile {
-    width: 300px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    font-size: 18px;
-    color: #333;
-}
-
-/* Job Title */
-.job-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Company Name */
-.job-company {
-    font-size: 16px;
-    color: #007BFF;
-    font-weight: bold;
-}
-
-/* Job Location */
-.job-location {
-    font-size: 14px;
-    color: #666;
-}
-
-.apply-btn {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 10px;
-    text-align: center;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    text-decoration: none;
-    display: inline-block;
-    transition: background 0.3s ease;
-}
-
-.apply-btn:hover {
-    background-color: #3a56e0;;
-}
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 
 ul {
-    list-style-position: inside; 
+    list-style-type: none;
     text-align:left; 
     padding-left: 0; 
 }
@@ -280,6 +217,7 @@ ul {
 
 ul li {
     margin-bottom: 8px;
+    list-style-type: none;
 }
 
 /* Apply button */
