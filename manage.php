@@ -15,6 +15,11 @@ if (!$conn) {
 }
 ?>
 
+<?php if (isset($_SESSION['username'])): ?>
+    <a href="register.php" class="btn">Register HR Manager</a>
+<?php endif; ?>
+
+
 <main class="apply-container">
     <h2>Manage EOIs</h2>
 

@@ -1,10 +1,20 @@
 <?php
 // register.php
+
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit();
+}
+
 include("settings.php");
+include("header.inc");
+include("nav.inc");
 
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     // Show the form if not submitted yet
     ?>
+    <main class="job-details-container">
     <!DOCTYPE html>
     <html lang="en">
     <head>
@@ -22,8 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] != "POST") {
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </p>
-            <input type="submit" value="Register">
+            <input type="submit" class="btn" value="Register">
         </form>
+        </main>
     </body>
     </html>
     <?php

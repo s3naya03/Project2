@@ -2,6 +2,7 @@
 include("header.inc");
 include("nav.inc");
 
+
 if ($_SERVER["REQUEST_METHOD"] != "POST") {
     header("Location: apply.php");
     exit();
@@ -60,7 +61,7 @@ if (in_array("Other", $skills) && empty($other_skills)) {
     $errors[] = "You selected 'Other skills' but did not specify them.";
 }
 
-echo "<main class='container'>";
+echo "<main class='job-details-container'>";
 if (count($errors) > 0) {
     echo "<div class='error-box'>";
     echo "<h2>Submission Error</h2><ul>";
@@ -125,5 +126,6 @@ echo "</main>";
 
 mysqli_stmt_close($stmt);
 mysqli_close($conn);
-include("footer.inc");
+
 ?>
+</main>

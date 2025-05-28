@@ -2,8 +2,8 @@
 <?php include("nav.inc"); ?>
 <?php include("settings.php"); ?>
 
-<main class="container">
-  <h2>Available Jobs</h2>
+<main class="job-details-container">
+  <h1>Available Jobs</h1>
 
   <?php
   $conn = mysqli_connect($host, $user, $password, $database);

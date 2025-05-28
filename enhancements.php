@@ -1,6 +1,6 @@
 <?php include("header.inc"); ?>
 <?php include("nav.inc"); ?>
-<main class="enhancement-container">
+<main class="job-details-container">
   <h1>Enhancements Implemented</h1>
 
   <section>

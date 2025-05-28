@@ -175,14 +175,6 @@ nav {
     border-radius: 8px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
----------------------------------------------------------------------------------------------------------------------------------------------------
-
-ul {
-    list-style-type: none;
-    text-align:left; 
-    padding-left: 0; 
-}
-
 
 /* Container and layout */
 .job-details-container {
@@ -194,6 +186,7 @@ ul {
     font-family: sans-serif;
     font-size: 16px;
     line-height: 1.6;
+    
 }
 
 /* Headings */
@@ -215,9 +208,10 @@ ul {
     color: #4a6bff;
 }
 
-ul li {
+.job-details-container ul li {
     margin-bottom: 8px;
     list-style-type: none;
+
 }
 
 /* Apply button */
@@ -265,23 +259,6 @@ ul li {
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 
-/* Apply Page Styles */
-.apply-container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    text-align: left;
-}
-
-.apply-container h2 {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 20px;
-    color: var(--dark-color);
-}
 
 /* Application Page Styles */
 
@@ -450,49 +427,7 @@ figcaption {
     color: #666;
 }
 
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f8f9ff;
-    font-weight: bold;
-}
-
-tr:hover {
-    background-color: #f5f5f5;
-}
-
-/* Profile Styles */
-.profiles {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-}
-
-.profile {
-    padding: 15px;
-    background-color: #f8f9ff;
-    border-radius: 8px;
-}
-
-.profile h3 {
-    color: #3949ab;
-    margin-bottom: 10px;
-}
-
-.profile p {
-    margin-bottom: 8px;
-}
 
 /* Contact Section */
 .contact {
@@ -542,45 +477,7 @@ tr:hover {
     font-weight: 600;
     color: #2c3e50;
 }
-/* Enhancement Page Styles */
-.enhancement-container {
-    max-width: 1000px;
-    margin: 40px auto;
-    padding: 0 20px;
-    color: #333;
-}
 
-.enhancement-container h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #2c3e50;
-}
-
-/* Video Demo Section */
-.video-demo {
-    margin-bottom: 40px;
-    text-align: center;
-}
-
-.video-wrapper {
-    max-width: 800px;
-    margin: 0 auto;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-video {
-    width: 100%;
-    display: block;
-    background: #000;
-}
-
-.video-caption {
-    margin-top: 10px;
-    font-style: italic;
-    color: #666;
-}
 
 
 
@@ -660,12 +557,6 @@ video {
         grid-template-columns: 1fr;
     }
     
-    .video-wrapper {
-        border-radius: 0;
-    }
-    
-    .enhancement-container {
-        padding: 0 15px;
-    }
+
 
 }
